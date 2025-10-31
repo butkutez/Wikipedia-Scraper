@@ -1,13 +1,19 @@
-from pathlib import Path
-from scraper.leaders_scraper import get_leaders
-from scraper.utils import save
+from scraper.leaders_scraper import WikipediaScrapper
 
-if __name__ == "__main__":
+def main():
 
-    leaders_data = get_leaders()
+    """Fetch leaders data and save it to 'leaders.json'."""
 
-    data_folder = Path("data")
-    data_folder.mkdir(exist_ok=True)
-
-    save(leaders_data)
+    # create instance
+    scrapper = WikipediaScrapper()
+    # fetch data         
+    scrapper.get_leaders()
+    # save to file
+    scrapper.save_to_json("leaders.json")                      
+    
     print("Leaders data fetched and saved successfully!")
+
+# run main() only if this script is executed directly
+# and not when it is imported as a module in another script
+if __name__ == "__main__":
+    main()
